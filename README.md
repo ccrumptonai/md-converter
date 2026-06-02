@@ -18,7 +18,7 @@ Write Markdown, preview it live, and export to **standalone HTML**, **PDF**, and
 
 ## 🚀 Use it
 
-**Live demo:** _add your GitHub Pages URL here_
+**Live demo:** https://ccrumptonai.github.io/md-converter/
 
 Or run locally:
 
