@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markdown → Anything</title>
+  <meta name="description" content="Write Markdown, preview live, export to standalone HTML, PDF, and slides. Local-first, no data leaves your browser." />
+
+  <!-- highlight.js theme for code blocks (live preview) -->
+  <link id="hljs-theme" rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css" />
+
+  <link rel="stylesheet" href="css/app.css" />
+  <link rel="stylesheet" href="css/themes.css" />
+  <link rel="stylesheet" href="css/print.css" media="print" />
+</head>
+<body>
+  <header class="toolbar">
+    <div class="brand">📝 Markdown&nbsp;→&nbsp;Anything</div>
+
+    <div class="controls">
+      <label class="ctl">
+        Theme
+        <select id="theme-select">
+          <option value="github">GitHub</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
+
+      <button id="btn-html"   class="btn" title="Download a self-contained .html file">Export HTML</button>
+      <button id="btn-pdf"    class="btn" title="Open the print dialog — choose 'Save as PDF'">Export PDF</button>
+      <button id="btn-slides" class="btn" title="Present sections split by --- ">Slides</button>
+      <button id="btn-sample" class="btn btn-ghost" title="Load demo content">Load sample</button>
+    </div>
+  </header>
+
+  <main class="panes">
+    <section class="pane editor-pane">
+      <textarea id="editor" spellcheck="false"
+                placeholder="# Start typing Markdown…"></textarea>
+    </section>
+    <section class="pane preview-pane">
+      <article id="preview" class="preview markdown-body" data-theme="github"></article>
+    </section>
+  </main>
+
+  <!-- Slides overlay -->
+  <div id="slides" class="slides-overlay" hidden>
+    <button id="slides-close" class="slides-close" title="Exit (Esc)">✕</button>
+    <div id="slide" class="slide markdown-body"></div>
+    <div class="slides-nav">
+      <button id="slide-prev" class="btn">‹ Prev</button>
+      <span id="slide-counter" class="slide-counter">1 / 1</span>
+      <button id="slide-next" class="btn">Next ›</button>
+    </div>
+  </div>
+
+  <!-- Libraries (CDN, pinned) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.11/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/export.js"></script>
+</body>
+</html>
