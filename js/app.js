@@ -57,22 +57,21 @@ Anything after a \`---\` becomes a new slide. Use ← / → and press **Esc** to
 ## That's it ✨
 `;
 
-  // marked: enable GFM + per-block syntax highlighting via highlight.js.
-  marked.setOptions({
-    gfm: true,
-    breaks: false,
-    highlight(code, lang) {
-      if (window.hljs && lang && hljs.getLanguage(lang)) {
-        try { return hljs.highlight(code, { language: lang }).value; } catch (_) {}
-      }
-      return window.hljs ? hljs.highlightAuto(code).value : code;
-    },
-  });
+  // marked v12 removed the `highlight` option, so we highlight after parsing
+  // by running highlight.js over each rendered code block.
+  marked.setOptions({ gfm: true, breaks: false });
+
+  /** Apply highlight.js to every <pre><code> block within a root element. */
+  function highlightWithin(root) {
+    root.querySelectorAll("pre code").forEach((block) => {
+      try { window.hljs.highlightElement(block); } catch (_) {}
+    });
+  }
 
   /** Render the current editor content into the preview pane (sanitized). */
   function render() {
-    const dirty = marked.parse(editor.value);
-    preview.innerHTML = DOMPurify.sanitize(dirty);
+    preview.innerHTML = DOMPurify.sanitize(marked.parse(editor.value));
+    highlightWithin(preview);
   }
 
   function debounce(fn, ms) {
@@ -122,6 +121,6 @@ Anything after a \`---\` becomes a new slide. Use ← / → and press **Esc** to
     getPreviewHTML: () => preview.innerHTML,
     getTheme: () => preview.getAttribute("data-theme"),
     getMarkdown: () => editor.value,
-    renderMarkdown: (md) => DOMPurify.sanitize(marked.parse(md)),
+    renderInto: (el, md) => { el.innerHTML = DOMPurify.sanitize(marked.parse(md)); highlightWithin(el); },
   };
 })();

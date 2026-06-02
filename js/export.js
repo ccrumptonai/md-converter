@@ -81,7 +81,7 @@ ${bodyHTML}
 
   function showSlide(i) {
     idx = Math.max(0, Math.min(i, slides.length - 1));
-    slideEl.innerHTML = window.mdApp.renderMarkdown(slides[idx]);
+    window.mdApp.renderInto(slideEl, slides[idx]);
     slideEl.setAttribute("data-theme", "light");
     counter.textContent = `${idx + 1} / ${slides.length}`;
     slideEl.scrollTop = 0;
