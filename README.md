@@ -4,7 +4,7 @@ Write Markdown, preview it live, and export to **standalone HTML**, **PDF**, and
 **slides** — all in your browser. No backend, no build step, no signup.
 **Nothing you type ever leaves your machine.**
 
-<!-- TODO: add a demo GIF here, e.g. ![demo](docs/demo.gif) -->
+![Markdown → Anything — live editor, preview, themes, and export](docs/demo.png)
 
 ## ✨ Features
 
